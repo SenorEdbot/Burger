@@ -1,7 +1,5 @@
 const connection = require("./connection.js");
 
-const dbTable = "burgers_db";
-
 function printQuestionMarks(num) {
     var arr = [];
 
@@ -35,17 +33,29 @@ function objToSql(ob) {
 }
 
 const orm = {
-    all: function(cb){
-        let queryString = `SELECT * FROM ${dbTable};`
+    selectAll: function(table, cb){
+        let queryString = `SELECT * FROM ${table};`
         connection.query(queryString, (err, result) => {
             if (err) throw err;
             cb(result);
         });
     },
-    create: function(cols, vals, cb){
-        let colToUpdate = cols.toString();
-        let valToUpdate = vals.toString();
-        let queryString = `INSERT INTO ${dbTable} (${colToUpdate}) VALUES (${printQuestionMarks(vals.length)})`
+    //Expecting a value from name and devoured
+    insertOne: function(table, name, devoured, cb){
+        let queryString = `INSERT INTO ${table} (burger_name, devoured) VALUES (??, ??)`
+        connection.query(queryString, [name, devoured], (err, result)=>{
+            if (err) throw err;
+            cb(result);
+        })
+    },
+    //Expecting objColVals and condition to be objects
+    updateOne: function(table, objColVals, condition, cb){
+        let queryString = `UPDATE ${table} SET ?? WHERE ??`;
+        connection.query(queryString,[objToSql(objColVals),condition], (err, result)=>{
+            if (err) throw err;
+            cb(result);
+        })
+
     }
 };
 
