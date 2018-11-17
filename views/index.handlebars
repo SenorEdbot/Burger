@@ -1,0 +1,18 @@
+<img src="/assets/img/burger.jpg" id="burgerImage" alt="Burger Image" />
+<h1>Eat-Da-Burger!</h1>
+<h3>Uneaten Burgers</h3>
+    <ul>
+        {{#each burger}}
+            {{#unless devoured}}
+                {{> burger/burger_block devoured=true}}
+            {{/unless}}
+        {{/each}}
+    </ul>
+<h3>Burger to be Eaten</h3>
+    <ul>
+        {{#each burger}}
+            {{#if devoured}}
+                {{> burger/burger_block devoured=false}}
+            {{/if}}
+        {{/each}}
+    </ul>
