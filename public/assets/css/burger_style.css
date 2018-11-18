@@ -1,3 +1,7 @@
 [data-id="burgerImage"] {
     width: 250px;
+    margin-left: 40%;
+}
+.addBurgerRow {
+    margin-left: 40%;
 }

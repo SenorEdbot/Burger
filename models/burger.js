@@ -4,12 +4,15 @@ const burger = {
     selectAll: (cb) => {
         orm.selectAll("burgers", (res) => cb(res));
     },
-    insertOne: (name, devoured, cb) => {
-        orm.insertOne("burgers", name, devoured, (res) => cb(res));
+    insertOne: (cols, vals, cb) => {
+        orm.insertOne("burgers", cols, vals, (res) => cb(res));
     },
     updateOne: (updateObject, condition, cb) => {
         orm.updateOne("burgers", updateObject, condition, (res) => cb(res));
-    }
+    },
+    delete: (condition, cb) => {
+        orm.delete("burgers", condition, (res) => cb(res));
+      }
 };
 
 module.exports = burger;
