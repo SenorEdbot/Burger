@@ -49,9 +49,11 @@ const orm = {
         })
     },
     //Expecting objColVals and condition to be objects
-    updateOne: function(table, objColVals, condition, cb){
-        let queryString = `UPDATE ${table} SET ?? WHERE ??`;
-        connection.query(queryString,[objToSql(objColVals),condition], (err, result)=>{
+    updateOne: function(table, updateObject, condition, cb){
+        let queryString = `UPDATE ${table} SET ${objToSql(updateObject)} WHERE ${condition}`;
+        console.log(updateObject);
+        console.log(queryString);
+        connection.query(queryString, (err, result)=>{
             if (err) throw err;
             cb(result);
         })
